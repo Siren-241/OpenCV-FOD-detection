@@ -1,0 +1,36 @@
+flowchart TD
+    U["Human Operator"]
+    CAM["Camera / Image Source"]
+    CAP["Image Capture<br/>capture_images.py"]
+    IMG["Baseline and<br/>Post-Maintenance Images"]
+
+    APP["Streamlit Dashboard<br/>src/app.py"]
+    ALIGN["Image Alignment<br/>ORB + Matching + RANSAC"]
+    DET["Change Detection<br/>OpenCV 5"]
+    CAND["Candidate Regions<br/>and Image Crops"]
+    LIMIT["Select Up to 10<br/>Candidates per Run"]
+    BEDROCK["AWS Bedrock<br/>Amazon Nova Pro"]
+    REPORT["Assessment Report<br/>and Evidence"]
+    REVIEW["Human Review<br/>Decision and Notes"]
+
+    U --> APP
+    CAM --> CAP
+    CAP --> IMG
+    IMG --> ALIGN
+    ALIGN --> DET
+    DET --> CAND
+    CAND --> LIMIT
+    LIMIT --> BEDROCK
+    BEDROCK --> REPORT
+    CAND --> APP
+    REPORT --> APP
+    APP --> REVIEW
+    U --> REVIEW
+
+    classDef external fill:#e8f0fe,stroke:#4776b4,color:#172b4d
+    classDef processing fill:#e8f5e9,stroke:#4f8b57,color:#183d20
+    classDef review fill:#fff3df,stroke:#b98535,color:#593b0b
+
+    class CAM,BEDROCK external
+    class CAP,IMG,ALIGN,DET,CAND,LIMIT,REPORT processing
+    class U,APP,REVIEW review

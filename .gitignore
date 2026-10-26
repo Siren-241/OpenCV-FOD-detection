@@ -1,0 +1,25 @@
+# Secrets and private keys
+*.pem
+.env
+.env.*
+!.env.example
+.aws/
+
+# Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local image data and backups
+src/data/
+src/data_bkup/
+
+# Generated detection results
+src/results/*
+!src/results/.gitkeep
+
+# Local editor and OS files
+.vscode/
+.idea/
+.DS_Store
